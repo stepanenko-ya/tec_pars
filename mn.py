@@ -1,4 +1,3 @@
-# from table import TecDoc
 from tabQ import TecDoc
 import os
 import pymssql
@@ -7,12 +6,15 @@ import shutil
 import logging
 import math
 from sys import argv
+
 conn = pymssql.connect(
     server="10.175.1.60:1433",
     user="importer_doc",
     password='QAZxsw123',
     database="Test")
 db = conn.cursor()
+
+field = "DLNr"                              # if previous version was Q1 or Q2 change to "DLNr"
 
 
 def create_table(version, table_num, arch_file):
@@ -25,8 +27,6 @@ def create_table(version, table_num, arch_file):
         db.execute("IF (OBJECT_ID('t" + table_num + "') IS NULL) EXEC('" + command_create + "')")
         conn.commit()
 
-        field = "TableNo"                              # if previous version was Q1 or Q2 change to "DLNr"
-        db.execute(f"select {field} from t{table_num}")
         if db.fetchone():
             db.execute(f"TRUNCATE TABLE t{table_num}")
 
