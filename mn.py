@@ -14,7 +14,7 @@ conn = pymssql.connect(
     database="Test")
 db = conn.cursor()
 
-field = "DLNr"                              # if previous version was Q1 or Q2 change to "DLNr"
+field = "TableNo"                              # if previous version was Q1 or Q2 change to "DLNr"
 
 
 def create_table(version, table_num, arch_file):
